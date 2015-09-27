@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<head>
+    <meta charset="utf-8">
+    <title>Браслет  </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="f_files/iframe.css">
+    <script type="text/javascript" src="f_files/jquery.js"></script>
+    <script type="text/javascript" src="f_files/jquery_mask.js"></script>
+</head>
+<body>
+<div class="content">
+    <div class="top">
+        <div class="left">
+            <h1>Гостевая книга</h1>
+        </div>
+        <div class="right">
+            <div class="wrap">
+                <div class="price">
+                    <div class="wrap">
+                        <div class="left big-text">Цена</div>
+                        <div class="right big-text">
+                            <span class="strike-text">3180 р.</span><br>
+                            1690 р.                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="wrap">
+            <div class="form">
+                <form action="gbook.php" method="POST">
+<!--                    <div class="row">-->
+<!--                        <label for="name">Страна</label>-->
+<!--                        <select name="country">-->
+<!--                            <option value="RU">Россия</option>-->
+<!--                            <option value="RU">Беларусь</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+                    <div class="row">
+                        <label for="name">ФИО</label>
+                        <input id="name" name="name" type="text" placeholder="Иванов Иван Иванович">
+                    </div>
+                    <div class="row">
+                        <label for="phone">Телефон</label>
+                        <input id="phone" name="phone" type="text">
+                    </div>
+                    <div class="row price">
+                        <div class="left">
+                            Стоимость заказа<br>
+                            Доставка
+                        </div>
+                        <div class="right">
+                            1690 р.<br>
+                           350 р.                        </div>
+                    </div>
+                    <div class="line"></div>
+                    <div class="row big-text">
+                        <div class="left">ИТОГО</div>
+                        <div class="right">  2040 р.</div>
+                    </div>
+                    <div class="row align-center">
+                        <input type="submit" value="ЗАКАЗАТЬ">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var sel_phone = $('input[name=phone]');
+        sel_phone.mask('+7 (000) 000-00-00');
+        if (sel_phone.val().length < 2)    sel_phone.val('+7');
+        sel_phone.on('focus, focusout', function () {
+            if ($(this).val().length < 2)    $(this).val('+7');
+        });
+
+        $('form').submit(function() {
+            $('input[name=name]', this).val($.trim($('input[name=name]', this).val()));
+            if(!$('input[name=name]', this).val()) {
+                alert('Укажите корректные ФИО!');
+                return false;
+            }
+
+            if(!$('input[name=phone]', this).val() || $('input[name=phone]', this).val().length < 18) {
+                alert('Укажите корректный телефон!');
+                return false;
+            }
+            return true;
+        });
+
+    });
+</script>
+</body>
+</html>
